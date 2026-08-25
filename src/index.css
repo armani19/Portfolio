@@ -1,0 +1,2 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+:root{font-family:Outfit,Arial,sans-serif;color:#343436;background:#fdfdff;font-synthesis:none}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--page);color:var(--ink);transition:background .25s,color .25s}a{color:inherit;text-decoration:none}button{font:inherit}

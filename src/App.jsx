@@ -1,31 +1,28 @@
-function App() {
-  return (
-    <div>
-    <header style={{ 
-      background: "#305982", 
-      padding: "1%", 
-      color: "white",
-      fontSize: "25px",
-      paddingLeft: "10%",
-      borderBottomLeftRadius: "20px",
-      borderBottomRightRadius: "20px",
-      fontFamily: "'Archivo Black', sans-serif"
-      }}>
+import { useEffect, useState } from 'react'
+import portrait from './assets/portrait.png'
+import './App.css'
+import './hero-fixes.css'
 
-      <h3 style={{margin:0}}>Magnifico |
-        <span style={{
-          fontSize: "20px",
-          marginLeft: "10px",
-        }}> BSIT-WMA Aspirant</span>
-      </h3>
-    </header>
-    
-    <main style={{ padding: "1%" }}>
-        <h2>Hello!</h2>
-        <p style={{fontFamily: "'Onest', sans-serif"}}>Welcome to my portfolio</p>
-    </main>
-    </div>
-  );
+const Icon = ({ name, size = 20 }) => {
+  const paths = {
+    linkedin: <><path d="M5 9v10"/><path d="M5 5v.01"/><path d="M10 19v-6a4 4 0 0 1 8 0v6"/><path d="M10 13v6"/></>,
+    github: <><path d="M15 22v-3.9c.04-1.01-.31-2-1-2.74 3.28-.37 6.73-1.61 6.73-7.26a5.66 5.66 0 0 0-1.5-3.93A5.26 5.26 0 0 0 19.1.3S17.9-.08 15 1.85a14.1 14.1 0 0 0-6 0C6.1-.08 4.9.3 4.9.3a5.26 5.26 0 0 0-.13 3.87 5.66 5.66 0 0 0-1.5 3.93c0 5.64 3.44 6.9 6.72 7.27a3.14 3.14 0 0 0-.94 2.43V22"/><path d="M9 19.4c-3 .93-3.63-1.28-3.63-1.28-.49-1.25-1.2-1.58-1.2-1.58-.98-.67.08-.66.08-.66 1.08.08 1.65 1.11 1.65 1.11.96 1.64 2.51 1.17 3.12.89"/></>,
+    arrow: <><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></>, sun: <><circle cx="12" cy="12" r="3.5"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></>, moon: <path d="M20.5 14.3A8.5 8.5 0 0 1 9.7 3.5 8.5 8.5 0 1 0 20.5 14.3Z"/>,
+    code: <><path d="m8 9-3 3 3 3"/><path d="m16 9 3 3-3 3"/><path d="m14 5-4 14"/></>, layers: <><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></>, menu: <><path d="M4 7h16M4 12h16M4 17h16"/></>, close: <path d="m6 6 12 12M18 6 6 18"/>
+  }
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[name]}</svg>
 }
-
-export default App;
+const navItems = [['About me', 'about'], ['Projects', 'projects'], ['Experience', 'experience'], ['Contact me', 'contact']]
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [dark, setDark] = useState(() => localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches)
+  useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; localStorage.setItem('theme', dark ? 'dark' : 'light') }, [dark])
+  const closeMenu = () => setMenuOpen(false)
+  return <div className="site-shell"><header className="nav-wrap"><a href="#home" className="brand" onClick={closeMenu}>ARMANI MAGNIFICO</a><nav className={menuOpen ? 'nav-links is-open' : 'nav-links'}>{navItems.map(([label, id]) => <a onClick={closeMenu} href={`#${id}`} key={id}>{label}</a>)}</nav><div className="header-controls"><button className="theme-switch" onClick={() => setDark(value => !value)} aria-label={`Switch to ${dark ? 'light' : 'dark'} mode`} aria-pressed={dark}><Icon name={dark ? 'sun' : 'moon'} size={16}/><span>{dark ? 'Light' : 'Dark'}</span></button><button className="menu-button" onClick={() => setMenuOpen(value => !value)} aria-label="Toggle navigation"><Icon name={menuOpen ? 'close' : 'menu'}/></button></div></header><main>
+    <section className="hero" id="home"><div className="hero-content"><p className="hero-greeting">Hello, my name is</p><h1>ARMANI MAGNIFICO</h1><p className="hero-copy">System Design &amp; Software Engineering | Frontend Developer |<br/>Quality Assurance Specialist | 4th year IT Student</p><div className="hero-actions"><a className="social-button social-linkedin" href="https://www.linkedin.com/in/armanimagnifico" target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">&gt;</span></a><a className="social-button social-gmail" href="mailto:armanimagnifico4195@gmail.com">Gmail <span aria-hidden="true">&gt;</span></a><a className="social-button social-github" href="https://github.com/armani19" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">&gt;</span></a></div></div><div className="portrait-orb"><img src={portrait} alt="Armani Magnifico"/></div></section>
+    <section className="section about-section" id="about"><div className="section-label"><span>01</span> About me</div><div className="about-content"><div className="about-text"><p>I’m a Bachelor of Science in Information Technology student specializing in Web and Mobile Applications at FEU Institute of Technology. I’m driven by a passion for building responsive, user-centered software.</p><p>My work combines clean design thinking with practical development. I value collaboration, stay curious, and enjoy solving meaningful problems one thoughtful detail at a time.</p></div></div><div className="skills-grid"><div><h3>Development</h3><p>HTML5 · CSS3 · React<br/>JavaScript · PHP · Python</p></div><div><h3>Workflow</h3><p>Git · GitHub · Vite<br/>VS Code · Figma</p></div><div><h3>Design</h3><p>Figma · Canva<br/>Microsoft Power Apps</p></div></div></section>
+    <section className="section projects-section" id="projects"><div className="section-label"><span>02</span> Selected projects</div><div className="projects-heading"><h2>Made with care,<br/>for real people.</h2><p>Projects where research, design, and development come together.</p></div><article className="featured-project"><div className="project-visual"><div className="visual-top"><span>Guidance Portal</span><span>2025</span></div><div className="mockup"><div className="mockup-bar"/><div className="mockup-lines"><i/><i/><i/></div><div className="mockup-card"><b>How can we help?</b><small>Guidance is one step away.</small></div></div></div><div className="project-details"><span className="project-number">01 / CAPSTONE</span><h3>Centralized Appointments Platform</h3><p>A student discipline and guidance-referral platform with AI-assisted asset resolution. Designed in Figma and built as a mobile-first experience for accessible student support.</p><div className="tags"><span>Figma</span><span>Mobile UI</span><span>Product Design</span></div></div></article></section>
+    <section className="section experience-section" id="experience"><div className="section-label"><span>03</span> Experience</div><div className="experience-heading"><h2>Showing up for<br/>the team.</h2><p>Learning leadership through action, organization, and shared goals.</p></div><div className="experience-card"><div className="experience-date">AUG 2024 — JUL 2025</div><div><h3>Director for Sports</h3><p className="company">Information Technology Alliance (ITAS) · FEU Institute of Technology</p></div><p className="experience-copy">Represented the IT student body in sports planning, managed 75+ BSI teams across three intramural seasons, and coordinated with student councils and partner organizations for university events.</p></div></section>
+    </main><footer id="contact"><div className="footer-top"><div><p>Have an idea in mind?</p><h2>Let’s make something meaningful.</h2></div><a href="mailto:armanimagnifico4195@gmail.com" className="footer-cta">Start a conversation <Icon name="arrow"/></a></div><div className="footer-grid"><a href="mailto:armanimagnifico4195@gmail.com">Email<br/><small>armanimagnifico4195@gmail.com</small></a><a href="https://www.linkedin.com/in/armanimagnifico" target="_blank" rel="noreferrer">LinkedIn<br/><small>/in/armanimagnifico</small></a><a href="https://github.com/armani19/Portfolio" target="_blank" rel="noreferrer">GitHub<br/><small>/armani19/Portfolio</small></a></div><div className="footer-bottom"><a href="#home" className="brand">ARMANI MAGNIFICO</a><p>© 2026 Armani Magnifico. All rights reserved.</p></div></footer></div>
+}
+export default App

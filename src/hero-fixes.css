@@ -1,0 +1,14 @@
+/* Refined portrait lighting and safe hero sizing. */
+html:root{--orb:radial-gradient(circle at 34% 25%,#c8ccff 0%,#a5abf4 42%,#7d84d8 100%)}
+html[data-theme='dark']:root{--orb:radial-gradient(circle at 34% 22%,#9ea6ff 0%,#6971c5 46%,#303765 100%);--glow:transparent}
+html .hero{gap:clamp(24px,4vw,50px)}
+html .hero-content{min-width:0}
+html .hero-actions{flex-wrap:nowrap;gap:12px}
+html .social-button{min-width:0;width:140px;flex:none;padding:14px 13px;font-size:clamp(15px,1.35vw,19px);border-radius:18px}
+html .social-linkedin{background:linear-gradient(135deg,#2487c7,#0a559c)}
+html .social-gmail{background:linear-gradient(135deg,#f05b50,#bf251e)}
+html .social-github{background:linear-gradient(135deg,#4a4c55,#15161b)}
+html .portrait-orb{width:min(38vw,590px)}
+
+@media(max-width:850px){html .portrait-orb{width:38vw}}
+@media(max-width:650px){html .social-button{width:calc((100% - 24px)/3)}html .portrait-orb{width:min(88vw,420px)}}
