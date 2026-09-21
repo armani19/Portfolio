@@ -1,7 +1,8 @@
 /* Refined portrait lighting and safe hero sizing. */
 html:root{--orb:radial-gradient(circle at 34% 25%,#c8ccff 0%,#a5abf4 42%,#7d84d8 100%)}
 html[data-theme='dark']:root{--orb:radial-gradient(circle at 34% 22%,#9ea6ff 0%,#6971c5 46%,#303765 100%);--glow:transparent}
-html .hero{gap:clamp(24px,4vw,50px)}
+html .hero{justify-content:center;gap:clamp(48px,5vw,120px)}
+html .hero-content{flex:0 1 850px}
 html .hero-content{min-width:0}
 html .hero-actions{flex-wrap:nowrap;gap:12px}
 html .social-button{min-width:0;width:140px;flex:none;padding:14px 13px;font-size:clamp(15px,1.35vw,19px);border-radius:18px}
