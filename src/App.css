@@ -13,8 +13,9 @@
 
 @media(max-width:650px){.theme-switch .theme-switch-icon{top:0}.theme-switch .theme-switch-knob{right:3px}.theme-switch.is-dark .theme-switch-knob{left:3px;right:auto}}
 
-.interest-nav{position:relative;z-index:3;margin:-72px auto 16px}
-@media(max-width:650px){.interest-nav{margin:-64px auto 12px}}
+.interest-carousel{position:relative}
+.interest-nav{position:absolute;z-index:3;left:50%;bottom:16px;margin:0;transform:translateX(-50%)}
+@media(max-width:650px){.interest-nav{bottom:12px}}
 
 .about-section{scroll-margin-top:60px;padding:78px clamp(24px,6.25vw,90px) 82px;background:var(--page)}
 .about-intro{padding:0 0 76px;background:var(--page);margin:0 calc(clamp(24px,6.25vw,90px) * -1);padding-left:clamp(24px,6.25vw,90px);padding-right:clamp(24px,6.25vw,90px)}
