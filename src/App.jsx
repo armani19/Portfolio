@@ -25,7 +25,11 @@ function App() {
   const [interestDirection, setInterestDirection] = useState('next')
   const interestButtonRefs = useRef([])
   const interestHasBeenUsed = useRef(false)
-  const [dark, setDark] = useState(() => localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches)
+  const [dark, setDark] = useState(() => {
+    const isDark = localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches
+    document.documentElement.dataset.theme = isDark ? 'dark' : 'light'
+    return isDark
+  })
   useEffect(() => { document.documentElement.dataset.theme = dark ? 'dark' : 'light'; localStorage.setItem('theme', dark ? 'dark' : 'light') }, [dark])
   const closeMenu = () => setMenuOpen(false)
   const goHome = event => { event.preventDefault(); closeMenu(); window.scrollTo({ top: 0, behavior: 'smooth' }) }
